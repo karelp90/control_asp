@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+
+        <title>Sistema de Control de ASP | Centros</title>
+
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div class="container">
+            <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+            <div th:if="${not #lists.isEmpty(centros)}">
+                <h2>Listado de Centros</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Jefe de Brigada</th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr th:each="centro,iterationStatus : ${centros}">
+                        <td th:text="${iterationStatus.count}">No.</td>
+                        <td th:text="${centro.name}">Name</td>
+                        <td th:text="${centro.jefeBrigada}">Jefe de Brigada</td>
+                        <td><a th:href="${ '/centro/' + centro.id}" class="btn btn-success btn-xs">View</a></td>
+                        <td><a th:href="${'/centro/edit/' + centro.id}" class="btn btn-warning btn-xs">Edit</a></td>
+                        <td><a th:href="${'/centro/delete/' + centro.id}" class="btn btn-danger btn-xs">Delete</a></td>
+                    </tr>
+                </table>
+
+            </div>
+            <p><i class="icon-camera-retro icon-3x"></i> icon-camera-retro</p>
+            <p><i class="icon-camera-retro icon-4x"></i> icon-camera-retro</p>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+        </div>
+
+    </body>
+</html>

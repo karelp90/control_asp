@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc693fe9-0704-4756-98c9-4880252899dc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="44"/>
+	<property name="ireport.y" value="102"/>
+	<queryString>
+		<![CDATA[SELECT     
+     centro."jefe_brigada" AS centro_jefe_brigada,
+     centro."name" AS centro_name,
+     agente."ci" AS agente_ci,
+     agente."lastname" AS agente_lastname,
+     agente."name" AS agente_name
+FROM
+     "agente" agente INNER JOIN "public"."centro" centro ON agente."centro_id_id" = centro."id"]]>
+	</queryString>
+	<field name="centro_jefe_brigada" class="java.lang.String"/>
+	<field name="centro_name" class="java.lang.String"/>
+	<field name="agente_ci" class="java.lang.String"/>
+	<field name="agente_lastname" class="java.lang.String"/>
+	<field name="agente_name" class="java.lang.String"/>
+	<variable name="TotalRowsreport" class="java.lang.Integer" calculation="Count"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="138" y="18" width="375" height="42" uuid="3793c51d-f0b2-49a5-8c7d-a2f2b65ae001"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Sistema de Control de Agentes de Seguridad]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="230" y="0" width="157" height="20" uuid="62c2ad25-f840-4554-9a79-cffb4cac02a4"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Agentes]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="26" height="20" uuid="4bfdf40d-4eb3-4c44-8c22-f68b90b3e980"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="44" y="0" width="86" height="20" uuid="ce3239fe-e335-47ae-bdb6-3e446b36507e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="16" width="555" height="1" uuid="d38f3a5a-bc80-4d5e-8882-b952206759ba"/>
+			</line>
+			<staticText>
+				<reportElement x="156" y="0" width="83" height="20" uuid="4f35d535-4199-4e76-9cf6-5cee38380886"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="86" height="20" uuid="da8835c6-885e-4181-9f28-84bdaee7d194"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="1" width="72" height="20" uuid="2e1c0a4d-9995-434b-a9b3-3ab83a76670f"/>
+				<text><![CDATA[J´. de Centro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="0" width="88" height="20" uuid="98d0cc2c-99e1-44bb-b681-2061d6dffed0"/>
+				<text><![CDATA[Centro]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="44" y="0" width="86" height="20" uuid="bd7e0d23-050d-406e-85dc-607f944f89a7"/>
+				<textFieldExpression><![CDATA[$F{agente_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="0" width="26" height="20" uuid="b2a2b247-4c88-4b73-905d-2b642fd94bb8"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="0" width="83" height="20" uuid="4b44f06a-4380-48b2-8843-615de7d498d8"/>
+				<textFieldExpression><![CDATA[$F{agente_lastname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="86" height="20" uuid="acde89bb-9952-4532-8f68-52dce20ada7a"/>
+				<textFieldExpression><![CDATA[$F{agente_ci}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="86" height="20" uuid="79e32f1a-a97b-470c-83d9-987e1d0af31a"/>
+				<textFieldExpression><![CDATA[$F{centro_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="2" width="72" height="20" uuid="577234cc-d95e-4436-8d92-ebc99930c78e"/>
+				<textFieldExpression><![CDATA[$F{centro_jefe_brigada}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="217" y="16" width="87" height="20" uuid="00da857d-4465-4a98-aa5b-3121bbf1d55c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="306" y="16" width="28" height="20" uuid="8e985a21-c910-46a9-bd29-1c004cafc336"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="422" y="15" width="85" height="20" uuid="137694d6-63d7-4db4-acf9-f71c6708d68b"/>
+				<text><![CDATA[Total de Agentes:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="505" y="15" width="47" height="20" uuid="412a5f4c-00dc-4b06-9b13-c5176c8e039c"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
