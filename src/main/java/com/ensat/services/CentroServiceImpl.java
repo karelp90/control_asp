@@ -3,6 +3,8 @@ package com.ensat.services;
 import com.ensat.entities.Centro;
 import com.ensat.repositories.CentroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -36,6 +38,11 @@ public class CentroServiceImpl implements CentroService {
     @Override
     public void deleteCentro(Integer id) {
         centroRepository.delete(id);
+    }
+
+    @Override
+    public Page<Centro> findAll(Pageable pageable) {
+        return centroRepository.findAll(pageable);
     }
 
 }

@@ -3,6 +3,8 @@ package com.ensat.controllers;
 import com.ensat.entities.Centro;
 import com.ensat.services.CentroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +31,12 @@ public class CentroController {
      * @return
      */
     @RequestMapping(value = "/centros", method = RequestMethod.GET)
-    public String list(Model model) {
-        model.addAttribute("centros", centroService.listAllCentros());
+    public String list(Model model, Pageable pageable) {
+        //model.addAttribute("centros", centroService.listAllCentros());
+        Page<Centro> centroPage = centroService.findAll(pageable);
+        PageWrapper<Centro> page = new PageWrapper<Centro>(centroPage, "/centros");
+        model.addAttribute("centros", page.getContent());
+        model.addAttribute("page", page);
         System.out.println("Returning centros:");
         return "centro/centros";
     }
@@ -92,4 +98,3 @@ public class CentroController {
     }
 
 }
-

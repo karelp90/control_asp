@@ -44,10 +44,10 @@ public class AgenteController {
 
     @Value("${spring.datasource.url}")
     private String urldb;
-    
+
     @Value("${spring.datasource.username}")
     private String userdb;
-    
+
     @Value("${spring.datasource.password}")
     private String passdb;
 
@@ -73,7 +73,7 @@ public class AgenteController {
         model.addAttribute("agentes", page.getContent());
         model.addAttribute("page", page);
         System.out.println("Returning agentes:");
-        return "agentes";
+        return "agente/agentes";
     }
 
     /**
@@ -86,7 +86,7 @@ public class AgenteController {
     @RequestMapping("agente/{id}")
     public String showAgente(@PathVariable Integer id, Model model) {
         model.addAttribute("agente", agenteService.getAgenteById(id));
-        return "agenteshow";
+        return "agente/agenteshow";
     }
 
     // Afficher le formulaire de modification du Agente
@@ -94,7 +94,7 @@ public class AgenteController {
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("agente", agenteService.getAgenteById(id));
         model.addAttribute("centros", centrosService.listAllCentros());
-        return "agenteform";
+        return "agente/agenteform";
     }
 
     /**
@@ -107,7 +107,7 @@ public class AgenteController {
     public String newAgente(Model model) {
         model.addAttribute("agente", new Agente());
         model.addAttribute("centros", centrosService.listAllCentros());
-        return "agenteform";
+        return "agente/agenteform";
     }
 
     /**
@@ -151,7 +151,6 @@ public class AgenteController {
             //Iterable<Obra> agentes = obraRepository.findAll();
             //JRDataSource jPDatasource = new JRBeanCollectionDataSource((Collection<Obra>) agentes);
             //parameterMap.put("datasource", agentes);
-
             Connection conn = DriverManager.getConnection(urldb, userdb, passdb);
             Date date = new Date();
             DateFormat hourdateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");

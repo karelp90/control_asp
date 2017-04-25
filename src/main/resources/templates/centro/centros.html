@@ -21,7 +21,7 @@
                         <th>Delete</th>
                     </tr>
                     <tr th:each="centro,iterationStatus : ${centros}">
-                        <td th:text="${iterationStatus.count}">No.</td>
+                        <td th:text="${iterationStatus.count + (page.size * (page.number-1))}">No.</td>
                         <td th:text="${centro.name}">Name</td>
                         <td th:text="${centro.jefeBrigada}">Jefe de Brigada</td>
                         <td><a th:href="${ '/centro/' + centro.id}" class="btn btn-success btn-xs">View</a></td>
@@ -31,9 +31,58 @@
                 </table>
 
             </div>
-            <p><i class="icon-camera-retro icon-3x"></i> icon-camera-retro</p>
-            <p><i class="icon-camera-retro icon-4x"></i> icon-camera-retro</p>
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="pagination"><p>Mostrando <span class="badge"
+                                                               th:text="${page.size * (page.number-1) + 1}"></span> de 
+                            <span class="badge" th:text="${page.lastPage ? page.totalElements : page.size * (page.number-1)+ page.size}"></span> de 
+                            <span class="badge"
+                                  th:text="${page.totalElements}"></span>
+                            centros</p></div>
+                </div>
+
+                <div class="col-sm-7">
+                    <!-- Pagination Bar -->
+                    <div th:fragment='paginationbar'>
+                        <div class="text-center">
+                            <ul class='pagination pagination-centered'>
+                                <li th:class="${page.firstPage}?'disabled':''">
+                                    <span th:if='${page.firstPage}'>← First</span>
+                                    <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>←
+                                        First</a>
+                                </li>
+                                <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+                                    <span th:if='${not page.hasPreviousPage}'>«</span>
+                                    <a th:if='${page.hasPreviousPage}'
+                                       th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'
+                                       title='Go to previous page'>«</a>
+                                </li>
+                                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
+                                    <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                                    <a th:if='${not item.current}'
+                                       th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span
+                                            th:text='${item.number}'>1</span></a>
+                                </li>
+                                <li th:class="${page.hasNextPage}? '' : 'disabled'">
+                                    <span th:if='${not page.hasNextPage}'>»</span>
+                                    <a th:if='${page.hasNextPage}'
+                                       th:href='@{${page.url}(page=${page.number},size=${page.size})}'
+                                       title='Go to next page'>»</a>
+                                </li>
+                                <li th:class="${page.lastPage}? 'disabled' : ''">
+                                    <span th:if='${page.lastPage}'>Last →</span>
+                                    <a th:if='${not page.lastPage}'
+                                       th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last →</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
 
     </body>
