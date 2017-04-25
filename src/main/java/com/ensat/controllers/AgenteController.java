@@ -28,6 +28,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +41,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AgenteController {
 
     private AgenteService agenteService;
+
+    @Value("${spring.datasource.url}")
+    private String urldb;
+    
+    @Value("${spring.datasource.username}")
+    private String userdb;
+    
+    @Value("${spring.datasource.password}")
+    private String passdb;
 
     @Autowired
     CentroService centrosService;
@@ -141,7 +151,8 @@ public class AgenteController {
             //Iterable<Obra> agentes = obraRepository.findAll();
             //JRDataSource jPDatasource = new JRBeanCollectionDataSource((Collection<Obra>) agentes);
             //parameterMap.put("datasource", agentes);
-            Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/control_asp", "postgres", "postgres");
+
+            Connection conn = DriverManager.getConnection(urldb, userdb, passdb);
             Date date = new Date();
             DateFormat hourdateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
             String fechaActual = hourdateFormat.format(date);
