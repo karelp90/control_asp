@@ -67,7 +67,7 @@ public class AgenteController {
      */
     @RequestMapping(value = "/agentes", method = RequestMethod.GET)
     public String list(Model model, Pageable pageable) {
-        //model.addAttribute("agentes", agenteService.listAllAgentes());
+        //model.addAttribute("agentes", agenteService.listAllAgentes()); ***usar en el caso de prescindir del paginador**
         Page<Agente> agentePage = agenteService.findAll(pageable);
         PageWrapper<Agente> page = new PageWrapper<Agente>(agentePage, "/agentes");
         model.addAttribute("agentes", page.getContent());

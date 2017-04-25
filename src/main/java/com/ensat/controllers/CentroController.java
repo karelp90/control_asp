@@ -32,7 +32,7 @@ public class CentroController {
      */
     @RequestMapping(value = "/centros", method = RequestMethod.GET)
     public String list(Model model, Pageable pageable) {
-        //model.addAttribute("centros", centroService.listAllCentros());
+        //model.addAttribute("centros", centroService.listAllCentros()); ***usar en el caso de prescindir del paginador**
         Page<Centro> centroPage = centroService.findAll(pageable);
         PageWrapper<Centro> page = new PageWrapper<Centro>(centroPage, "/centros");
         model.addAttribute("centros", page.getContent());
