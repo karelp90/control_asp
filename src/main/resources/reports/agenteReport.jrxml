@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cc693fe9-0704-4756-98c9-4880252899dc">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="44"/>
-	<property name="ireport.y" value="102"/>
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="24"/>
+	<style name="stripped rows" mode="Opaque" backcolor="#EAEAEA">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+			<style mode="Transparent" backcolor="#FFFFFF"/>
+		</conditionalStyle>
+	</style>
 	<queryString>
 		<![CDATA[SELECT     
      centro."jefe_brigada" AS centro_jefe_brigada,
@@ -23,9 +29,9 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="44" splitType="Stretch">
 			<staticText>
-				<reportElement x="138" y="18" width="375" height="42" uuid="3793c51d-f0b2-49a5-8c7d-a2f2b65ae001"/>
+				<reportElement x="138" y="2" width="375" height="42" uuid="3793c51d-f0b2-49a5-8c7d-a2f2b65ae001"/>
 				<textElement>
 					<font size="18"/>
 				</textElement>
@@ -34,14 +40,28 @@ FROM
 		</band>
 	</title>
 	<pageHeader>
-		<band height="42" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
 				<reportElement x="230" y="0" width="157" height="20" uuid="62c2ad25-f840-4554-9a79-cffb4cac02a4"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Listado de Agentes]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="1" y="35" width="94" height="20" uuid="fece3006-c9e7-4edd-87b9-2c3bd5f2fa56"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Feha del Reporte:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="88" y="35" width="100" height="20" uuid="bf383d47-20a1-4160-9ce2-1549bc64cf41"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -79,38 +99,47 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement x="482" y="1" width="72" height="20" uuid="2e1c0a4d-9995-434b-a9b3-3ab83a76670f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[J´. de Centro]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="377" y="0" width="88" height="20" uuid="98d0cc2c-99e1-44bb-b681-2061d6dffed0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Centro]]></text>
 			</staticText>
+			<line>
+				<reportElement x="-1" y="1" width="556" height="1" uuid="b7a06dd0-2650-429f-9e9c-1d5e8d216a27"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="44" y="0" width="86" height="20" uuid="bd7e0d23-050d-406e-85dc-607f944f89a7"/>
+				<reportElement style="stripped rows" x="44" y="0" width="112" height="20" uuid="bd7e0d23-050d-406e-85dc-607f944f89a7"/>
 				<textFieldExpression><![CDATA[$F{agente_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="4" y="0" width="26" height="20" uuid="b2a2b247-4c88-4b73-905d-2b642fd94bb8"/>
+				<reportElement style="stripped rows" x="0" y="0" width="44" height="20" uuid="b2a2b247-4c88-4b73-905d-2b642fd94bb8"/>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="156" y="0" width="83" height="20" uuid="4b44f06a-4380-48b2-8843-615de7d498d8"/>
+				<reportElement style="stripped rows" x="156" y="0" width="114" height="20" uuid="4b44f06a-4380-48b2-8843-615de7d498d8"/>
 				<textFieldExpression><![CDATA[$F{agente_lastname}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="270" y="0" width="86" height="20" uuid="acde89bb-9952-4532-8f68-52dce20ada7a"/>
+				<reportElement style="stripped rows" x="270" y="0" width="109" height="20" uuid="acde89bb-9952-4532-8f68-52dce20ada7a"/>
 				<textFieldExpression><![CDATA[$F{agente_ci}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="379" y="0" width="86" height="20" uuid="79e32f1a-a97b-470c-83d9-987e1d0af31a"/>
+				<reportElement style="stripped rows" x="379" y="0" width="103" height="20" uuid="79e32f1a-a97b-470c-83d9-987e1d0af31a"/>
 				<textFieldExpression><![CDATA[$F{centro_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="482" y="2" width="72" height="20" uuid="577234cc-d95e-4436-8d92-ebc99930c78e"/>
+				<reportElement style="stripped rows" x="482" y="0" width="72" height="20" uuid="577234cc-d95e-4436-8d92-ebc99930c78e"/>
 				<textFieldExpression><![CDATA[$F{centro_jefe_brigada}]]></textFieldExpression>
 			</textField>
 		</band>
